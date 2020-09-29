@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<title>Document Manager</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="file:///android_asset/vue/vue.min.js" ></script>
+<link rel="stylesheet" href="file:///android_asset/css/bootstrap.min.css">
+<link rel="stylesheet" href="file:///android_asset/css/css.css">
+<link rel="stylesheet" href="file:///android_asset/css/css-montserrat.css">
+<link rel="stylesheet" href="file:///android_asset/css/font-awesome.min.css">
+<link rel="stylesheet" href="file:///android_asset/css/w3.css">
+<script src="file:///android_asset/js/jquery.min.js" ></script>
+
+
+<style>
+.w3-sidebar a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+</style>
+<body class="w3-content" style="max-width:1200px">
+<div id="docApp">
+    <!-- Sidebar/menu -->
+    <!--menu-bar></menu-bar>-->
+
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:250px">
+
+        <!-- Push down content on small screens -->
+        <div class="w3-hide-large" style="margin-top:83px"></div>
+
+        <!-- Top header -->
+        <header v-show="!showLoginPage" class="w3-container w3-xlarge">
+            <p class="w3-left">Documents</p>
+        </header>
+
+        <!-- Image header -->
+        <div class="w3-display-container w3-container">
+
+        </div>
+
+        <div class="container">
+            <!-- Product grid -->
+            <div v-show="showLoginPage">
+                <login-template  v-on:show-options="hideLogin" ></login-template>
+            </div>
+            <div v-if="!showLoginPage">
+                <div>
+                    <div class="list-group">
+                        <div v-for="doc in docs" :key="doc.docTitle">
+                            <doc-row  v-on:update-doc-row="updateDocRow" v-on:delet-request-from-child="removeDoc" :title="doc.docTitle" :doc-value="doc.docText"></doc-row>
+                        </div>
+                    </div>
+                    <create-document v-on:update-doc-row="updateDocsRows"></create-document>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+ </div>
+
+    <script src="file:///android_asset/vue/app.js" type="application/javascript"></script>
+
+
+</body>
+</html>
